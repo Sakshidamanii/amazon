@@ -1,0 +1,13 @@
+class Solution {
+    public List<String> topKFrequent(String[] words, int k) {
+        Map<String, Integer> map = new TreeMap<>();
+        for (String s : words) {
+            map.merge(s, 1, Integer::sum);
+        }
+        return map.entrySet().stream()
+                .sorted(Collections.reverseOrder(Map.Entry.comparingByValue()))
+                .limit(k)
+                .map(Map.Entry::getKey)
+                .toList();
+    }
+}
