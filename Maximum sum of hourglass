@@ -1,0 +1,26 @@
+class Solution {
+    public int maxSum(int[][] grid) {
+        
+        // as we can only traverse till -2 position in the matrix 
+        // consider the example 1 ---
+        // if I am standing on 6, I'm 3 blocks away from boundary
+        // if I am standing on 2 I'm 2 blocks away
+        // If I am on 1, then I'm 1 block away !! Trigger, as at this block I cannot form a hourglass
+        
+        // Similar to this you can see in column
+        // Hence, we have to do length-2 on both, so that it does not go our of bounds
+        
+        int sum = 0;
+        
+        for(int i=0;i<grid.length-2;i++)
+        {
+            for(int j=0;j<grid[i].length-2;j++)
+            {
+                // find sum - simply by considering exmaple 2 in respect to i and j
+                sum = Math.max(sum, grid[i][j] + grid[i][j+1] + grid[i][j+2] + grid[i+1][j+1] + grid[i+2][j] + grid[i+2][j+1] + grid[i+2][j+2]);
+            }
+        }
+        
+        return sum;
+    }
+}
