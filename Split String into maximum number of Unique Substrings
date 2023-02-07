@@ -1,0 +1,37 @@
+class Solution {
+    public int maxUniqueSplit(String s) {
+        
+        build(s, 0);
+        return count;
+    }
+    
+    HashMap<String, Integer> map = new HashMap<String, Integer>();
+    int count = 0;
+    
+    public void build(String s, int index) {
+        
+        if(index == s.length()) {
+        
+            if(count < map.size()) {
+                count = map.size();
+            }
+          //  System.out.println(map);
+            return;
+        }
+        
+        
+        for(int i = index ; i < s.length(); i++) {
+            String t = s.substring(index, i+1);
+            if(map.get(t) != null) {
+               // map.remove(t);
+                continue;
+            }
+            map.put(t, 1);
+            build(s, i+1);
+            map.remove(t);
+        }
+        
+    }
+    
+    
+}
